@@ -35,8 +35,7 @@ class Config(object):
     APP_NAME = APP_NAME
 
 
-    # DB_URI = os.path.join(BASE_URI, '.barleyandshekelaudit.sqlite')
-    DB_URI = ""
-    # SQLALCHEMY_DATABASE_URI = 'postgresql:///' + DB_URI
-    SQLALCHEMY_DATABASE_URI = 'postgresql://barley:password@localhost:5432/barleyandshekelaudit'
+    DB_URI = os.path.join(BASE_URI, '.barleyandshekelaudit.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DB_URI
+    #SQLALCHEMY_DATABASE_URI = 'postgresql://barley:password@localhost:5432/barleyandshekelaudit'
     #APP_STATIC_DATA_URI = os.path.join(BASE_URI, APP_NAME, 'data')
