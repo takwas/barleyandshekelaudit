@@ -70,8 +70,12 @@ def update():
 
     form = request.form
     print form['hidden_fld']
+    updated_flds = form['hidden_fld'].split(',')
+    updated_flds.pop()
+    
     for element in form.iterkeys():
-        if element.startswith('_units_'):
+        if element in updated_flds:
+            print element, "jffsfdlskdflsd"
             value = form.get(element)
             item_id = int(element[element.rfind('_')+1:])
             param_dict = {
