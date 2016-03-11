@@ -1,0 +1,70 @@
+{%extends 'bootstrap/base.html'%}
+
+
+{%block head%}
+
+    <title>{%block title%}Barley & Shekel{%endblock title%}</title>
+
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    {%block meta%}
+        <meta name="viewport" content="width=device-width, initial-scale=1.8, maximum-scale=2, user-scalable=yes">
+    {%endblock meta%}
+
+   {%block styles%}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+
+        <link href="{{url_for('static', filename='css/style.css')}}" type="text/css" rel="stylesheet" />
+    {%endblock styles%}
+
+{%endblock head%}
+
+
+{%block content%}
+    {{super()}}
+
+    {#DEBUG CODE#}
+    {#Displays flash messages#}
+        {% block flash_msg %}   
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul id="all_flash">
+                        <div id="aui-message-bar" class="aui-message aui-message-error error closeable shadowed">
+                            {% for message in messages %}
+                                <li class="flash">
+                                    <p class="title">
+                                        <strong></strong>
+                                    </p>
+                                    {{message}}
+                                    <!-- .aui-message -->
+                                    <span class="glyphicon glyphicon-ok" role="button" tabindex="0"></span>
+                                </li>
+                                <br/>
+                            {% endfor %}
+                        </div>
+                    </ul>
+                    
+                {% endif %}
+            {% endwith %}
+        {% endblock flash_msg %}
+    {#end DEBUG CODE#}   
+{%endblock content%}
+
+
+{%block scripts%}
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript" charset="utf-8">
+        function hideFlashMsg(){
+            $("#all_flash").addClass("hidden_msg")
+        };
+        
+        $.ready(setTimeout(hideFlashMsg, 3000)); 
+
+    </script>
+{%endblock scripts%}

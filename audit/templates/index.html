@@ -1,0 +1,197 @@
+{%extends 'base.html'%}
+
+{%block title%}
+    {{super()}}
+{%endblock title%}
+
+{%block styles%}
+    {{super()}}
+
+    <style>
+        .quick-search-form .form-control {
+            height: 35px;
+            padding: 8px 15px;
+            color: #a4a4a4;   /* change  color of text to be typed inside search box */
+            font-size: 13px;
+            line-height: 20px;
+            background-color: transparent;
+            border: 1px solid #ccc;
+            border-radius: 0!important;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+
+
+        .btn-custom {
+            color: ##FFFFFF;            
+            background-color: #7bae23;   /* change  button color */
+            border-radius: 0!important;    /* button border radius */
+            padding: 6px 10px;              /* Button size change*/
+
+        }
+
+        .btn-custom:hover{
+            background-color:#9AC94B; /* change  button color on hover */
+            border-radius: 0!important;
+
+        }
+
+
+        .custom-glyph-color{
+            color:#fff;       /* change  magnifying glass color in  button */
+        }
+
+        .custom-glyph-color:hover{
+            color:#b1b1b1;         /* change  magnifying glass color in  button on mouse hover */
+        }
+
+
+    </style>
+
+    <style>
+        
+       .btn span.glyph {                
+  /*          opacity: 0;*/
+
+        }
+        .btn.active span.glyph {                
+/*            opacity: 1;*/
+
+        }
+
+        /* Compiled CSS */
+    .someDiv {
+      background-color: #FFF;
+      background-image: -webkit-linear-gradient(left, #FFF, #EEE);
+      background-image: -moz-linear-gradient(left, #FFF, #EEE);
+      background-image: -o-linear-gradient(left, #FFF, #EEE);
+      background-image: -ms-linear-gradient(left, #FFF, #EEE);
+      background-image: linear-gradient(left, #FFF, #EEE);
+    }
+    </style>
+    <style>
+
+    #aui-message-bar { /*.aui-message.shadowed {*/
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.13);
+        background: none repeat scroll 0% 0% #52FF40;
+        border-color: #D04437;
+        color: #333;
+
+        border-width: 1px;
+        border-style: solid;
+
+        border-radius: 3px;
+
+        line-height: 20px;
+        width: 900px;
+        margin: 10px auto 0;
+        position: relative;
+        word-wrap: break-word;
+        padding: 20px 60px 20px 60px;
+
+        text-align: center;
+        font-family: Arial,sans-serif;
+        font-size: 20px;
+        list-style-type: none;
+    }
+
+    #all_flash{
+        margin-top: 100px;
+    }
+    .hidden_msg{
+        display:none;
+    }
+
+    </style>
+{%endblock styles%}
+
+
+{%block content%}
+    {{super()}}
+    <div class="container someDiv">
+        <div class="row row-centered">
+            <div class="col-xs-6 col-lg-6 col-centered"><span class="h3">Barley & Shekel</span></div>
+        </div>
+        <br/>
+        <div class="row">
+            <!-- <div class="well well-sm text-center someDiv"> -->
+
+                <form accept-charset="UTF-8" method="POST" action="." id="" class="form-inline quick-search-form" >
+                    {{searchform.hidden_tag()}}
+                    
+                    <div class="col-xs-12 col-lg-12 col-centered">
+                        <div class="btn-group" data-toggle="buttons">
+                                
+                            <label class="btn btn-success active" id="lab1">
+                                <input type="radio" name="mode_radio_fld" id="option1" value="name" checked>
+                                <span class="glyph">By Name</span>
+                            </label>
+
+                            <label class="btn btn-danger" id="lab2">
+                                <input type="radio" name="mode_radio_fld" id="option2" value="isbn">
+                                <span class="glyph">By ISBN</span>
+                            </label>
+                        
+                        </div>
+                    </div>                
+                        <br/>
+                        <br/>
+                    <div class="col-xs-6 col-lg-6">
+                        <div class="form-group">
+                            {{searchform.query_fld(placeholder="Enter query...", id="search_query_fld", class="form-control")}}
+
+                            <button type="submit" id="quick-search" class="btn btn-custom"><span class="glyphicon glyphicon-search custom-glyph-color"></span></button>
+
+                        </div>
+                        
+                        {#{{searchform.submit_btn(id="quick-search", class="btn btn-custom")}}#}
+                        
+                        
+                    </div>    
+                        
+                    {#{{searchform.mode_radio_fld(id="search_mode_radio")}}#}  
+                </form>
+            <!-- </div> -->
+        </div>
+    </div>
+{%endblock content%}
+
+
+
+{%block scripts%}
+    {{super()}}
+    <script type="text/javascript">
+        /*$('.btn-success>input').click(function() {
+            alert('test');
+            $('input[type="radio"][name="mode_radio_fld"]').not(':checked').prop("checked", true);
+
+        });*/
+
+        $('#lab1').click(function(){
+            /*$('input[name="mode_radio_fld"]').change(function(){
+                $('#search_query_fld').val(this.value+"sdsd");
+            });*///.not(':checked').prop("checked", true);
+            /*$('#option2').prop("checked", false)*/
+            $('#lab2').addClass("btn-danger");
+            
+            /*$('#option1').prop("checked", true)*/
+            $('#lab1').removeClass("btn-danger").addClass("active btn-success");
+
+        });
+
+        $('#lab2').click(function(){
+            /*$('input[name="mode_radio_fld"]').change(function(){
+                $('#search_query_fld').val(this.value+"sdsd");
+            });*/
+            /*$('#option1').prop("checked", false)*/
+            $('#lab1').addClass("btn-danger");
+
+            /*$('#option2').prop("checked", true)*/
+            $('#lab2').removeClass("btn-danger").addClass("active btn-success");
+
+            
+        });
+
+    </script>
+{%endblock scripts%}

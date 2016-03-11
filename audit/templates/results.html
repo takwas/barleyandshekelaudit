@@ -1,0 +1,304 @@
+{%extends 'base.html'%}
+
+{%block title%}
+    {{super()}}
+{%endblock title%}
+
+{%block meta%}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=yes">
+{%endblock meta%}
+
+{%block styles%}
+    {{super()}}
+
+    <style>
+        /*@import url({{url_for('static', filename='css/font-awesome.css')}});*/
+
+        @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
+        .spinner input {
+          text-align: right;
+        }
+
+        .input-group-btn-vertical {
+          position: relative;
+          white-space: nowrap;
+          width: 2%;
+          vertical-align: middle;
+          display: table-cell;
+        }
+
+        .input-group-btn-vertical > .btn {
+          display: block;
+          float: none;
+          width: 100%;
+          max-width: 100%;
+          padding: 8px;
+          margin-left: -1px;
+          position: relative;
+          border-radius: 0;
+        }
+
+        .input-group-btn-vertical > .btn:first-child {
+          border-top-right-radius: 4px;
+        }
+
+        .input-group-btn-vertical > .btn:last-child {
+          margin-top: -2px;
+          border-bottom-right-radius: 4px;
+        }
+
+        .input-group-btn-vertical i {
+          position: absolute;
+          top: 0;
+          left: 4px;
+        }
+
+    </style>
+    <style>
+    .table-bordered {
+        border: 1px solid #dddddd;
+        border-collapse: separate;
+        border-left: 0;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        }
+
+        .table {
+        width: 100%;
+        margin-bottom: 20px;
+        background-color: transparent;
+        border-collapse: collapse;
+        border-spacing: 0;
+        display: table;
+        }
+
+        .widget.widget-table .table {
+        margin-bottom: 0;
+        border: none;
+        }
+
+        .widget.widget-table .widget-content {
+        padding: 0;
+        }
+
+        .widget .widget-header + .widget-content {
+        border-top: none;
+        -webkit-border-top-left-radius: 0;
+        -webkit-border-top-right-radius: 0;
+        -moz-border-radius-topleft: 0;
+        -moz-border-radius-topright: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        }
+
+        .widget .widget-content {
+        padding: 20px 15px 15px;
+        background: #FFF;
+        border: 1px solid #D5D5D5;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        }
+
+        .widget .widget-header {
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        background: #E9E9E9;
+        background: -moz-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(100%, #e9e9e9));
+        background: -webkit-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+        background: -o-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+        background: -ms-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+        background: linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+        text-shadow: 0 1px 0 #fff;
+        border-radius: 5px 5px 0 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1),inset 0 1px 0 white,inset 0 -1px 0 rgba(255,255,255,0.7);
+        border-bottom: 1px solid #bababa;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9');
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
+        border: 1px solid #D5D5D5;
+        -webkit-border-top-left-radius: 4px;
+        -webkit-border-top-right-radius: 4px;
+        -moz-border-radius-topleft: 4px;
+        -moz-border-radius-topright: 4px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        -webkit-background-clip: padding-box;
+        }
+
+        thead {
+        display: table-header-group;
+        vertical-align: middle;
+        border-color: inherit;
+        }
+
+        .widget .widget-header h3 {
+        top: 2px;
+        position: relative;
+        left: 10px;
+        display: inline-block;
+        margin-right: 3em;
+        font-size: 14px;
+        font-weight: 600;
+        color: #555;
+        line-height: 18px;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .widget .widget-header [class^="icon-"], .widget .widget-header [class*=" icon-"] {
+        display: inline-block;
+        margin-left: 13px;
+        margin-right: -2px;
+        font-size: 16px;
+        color: #555;
+        vertical-align: middle;
+        }
+    </style>
+
+    <style>
+        .spinner input {
+
+            text-align: center;
+            
+
+        }
+
+    </style>
+{%endblock styles%}
+
+
+{%block content%}
+
+{{super()}}
+
+<div class="container">
+    <div class="row row-centered">
+
+        <div class="span7">   
+            <div class="page-header">
+                <h1>Search result returned:</h1>
+            </div>
+            <div class="widget stacked widget-table action-table">
+                    
+                <div class="widget-content">
+                    
+                    <form action="/update" name="record_update_form" accept-charset="UTF-8" method="POST" >
+                    {{record_update_form.hidden_tag()}}
+                    <input name="hidden_fld" id="hidden_fld" type="text" value="" />
+                
+                
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>S/No.</th>
+                                <th>ISBN</th>
+                                <th>Description</th>
+                                <th>Units on Hand</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {%set count=1%}
+                        {%if items != None%}
+                            {%for item in items%}
+                            <tr>
+                                <td>{{count}}</td>
+                                <td>{{item.isbn}}</td>
+                                <td>{{item.name}}</td>
+                                <td>
+                                    
+                                        <div class=" input-group spinner" style="display:inline-block;">
+
+                                            <div class="btn btn-success col-xs-3 col-lg-3 col-centered">
+                                                <i class="fa fa-caret-up"></i>
+                                            </div>
+                                        
+                                            <div class="col-xs-6 col-lg-6 col-centered">
+                                                <input name="_units_{{item.rec_id}}" type="number" min="0" max="500" id="{{item.rec_id}}" class="units" value="{{item.units}}" size="5" oninput="alert('change')" />
+                                            </div>
+                                        
+                                            <div class="btn btn-danger col-xs-3 col-lg-3 col-centered">
+                                                <i class="fa fa-caret-down"></i>
+                                            </div>       
+                                        </div>
+                                    
+                                </td>
+                            </tr>
+                            {%set count=count+1%}
+                            {%endfor%}
+                        {%endif%}
+                        </tbody>
+                    
+                    </table>
+                    <br/>
+                    
+                    
+                    <input class="btn btn-success" type="submit" value="Update"/>
+                    </form>    
+                </div> <!-- /widget-content -->
+                
+            </div> <!-- /widget -->
+        </div>
+       
+        <br/> <br/> <br/>
+        <a href="{{url_for('index')}}"><div class="btn btn-info">Return Home</div></a>
+    </div>
+  
+</div>
+{%endblock content%}
+
+
+{%block scripts%}
+    {{super()}}
+    <script type="text/javascript">
+    $(function(){
+
+        $('.spinner .btn:first-of-type').on('click', function() {
+          var btn = $(this);
+          var input = btn.closest('.spinner').find('input');
+          if (input.attr('max') == undefined || parseInt(input.val()) < parseInt(input.attr('max'))) {    
+            input.val(parseInt(input.val(), 10) + 1);
+          } else {
+            btn.next("disabled", true);
+          }
+        });
+        $('.spinner .btn:last-of-type').on('click', function() {
+          var btn = $(this);
+          var input = btn.closest('.spinner').find('input');
+          if (input.attr('min') == undefined || parseInt(input.val()) > parseInt(input.attr('min'))) {    
+            input.val(parseInt(input.val(), 10) - 1);
+          } else {
+            btn.prev("disabled", true);
+          }
+        });
+
+    });
+
+    var record = function(){
+
+        hidden_fld = document.getElementById('hidden_fld');
+        hidden_fld.value += this.name+',';
+    };
+
+    (function() {
+      "use strict";
+      
+      var myInputs = document.querySelectorAll("input.units");
+      
+      Array.prototype.forEach.call(myInputs, function(el) {
+        el.addEventListener("input", handleEvent);
+        el.addEventListener("change", handleEvent);
+      });
+      
+      function handleEvent (e) {
+        console.log([
+          e.type,
+          "on",
+          this.id + ":",
+          this.value].join(" "));
+      }
+    })();
+    </script>
+{%endblock scripts%}
