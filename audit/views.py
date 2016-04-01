@@ -49,19 +49,6 @@ def results(mode="name", query=""):
 
         return render_template('results.html', items=items, record_update_form=form)
 
-    # elif request.method == 'POST':
-
-    #     form = request.form
-    #     print form
-
-    #     # item_id = 
-    #     # isbn = 
-    #     # name = 
-    #     param_dict = {'item_id':1, 'isbn':3, 'name':2}
-
-    #     #db_ops.update_row(db_ops.Record, dict('rec_id':...), param_dict)
-
-
 @app.route('/update', methods=['GET', 'POST'])
 def update():
 
