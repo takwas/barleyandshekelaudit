@@ -185,7 +185,7 @@
                     
                 <div class="widget-content">
                     
-                    <form action="/update" name="record_update_form" accept-charset="UTF-8" method="POST" >
+                    <form action="{{url_for('update')}}" name="record_update_form" accept-charset="UTF-8" method="POST" >
                     {{record_update_form.hidden_tag()}}
                     <input name="hidden_fld" id="hidden_fld" type="hidden" value="" />
                 
