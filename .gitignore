@@ -2,3 +2,5 @@
 *~
 *.swp
 *.sqlite
+*.xlsx
+.~lock*
