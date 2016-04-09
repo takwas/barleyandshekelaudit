@@ -15,15 +15,16 @@ class Record(db.Model):
 
     units = db.Column(db.Integer, nullable=True, default=0)           # this field will store the password hash
 
+    publisher = db.Column(db.String(1024), default='', nullable=True, unique=False)
 
     # object initialization method
-    def __init__(self, isbn=None, name=None, units=None):
+    def __init__(self, isbn=None, name=None, units=0, publisher=''):
 
         self.isbn = isbn
         self.name = name
         self.units = units if units is not None else 0
+        self.publisher = publisher
         
-
     # string representation for this object
     def __repr__(self):
-        return '<Record [%r, %r>' % (self.isbn, self.name)
+        return '<Record [%r, %r; Publisher: %r] >' % (self.isbn, self.name, self.publisher)

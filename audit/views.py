@@ -20,10 +20,6 @@ def index():
             mode=form['mode_radio_fld'],
             query=form['query_fld']))
 
-        # else:
-        #     print "INVALID FORM DATA!!!!!"
-        #     return redirect(url_for('index'))
-
     return render_template('index.html', searchform = form)
 
 
@@ -31,21 +27,15 @@ def index():
 @app.route('/results/<mode>/<query>', methods=['GET','POST'])
 def results(mode="name", query=""):
 
-
     if request.method == 'GET':
-        
         form = RecordUpdateForm()
         items=None
-        data = load_data()
         pattern = '%'+'%'.join(query.split())+'%'
 
         if mode == 'name' or mode == 'isbn':
             items = db_ops.ret_like(db_ops.Record,
                 field=mode, pattern=pattern)
 
-        # elif mode == 'isbn':
-        #     items = db_ops.ret_all_val(db_ops.Record,
-        #         dict(isbn=query))
 
         return render_template('results.html', items=items, record_update_form=form)
 
@@ -53,19 +43,24 @@ def results(mode="name", query=""):
 def update():
 
     if request.method == 'POST':
-        form = request.form
-        print form['hidden_fld']
-        print form
+        form = request.form # grab submitted form
         
         updated_flds = form['hidden_fld'].split(',')
         updated_flds.pop()
-        print "HERE"
+
+        # The form is a dictionary mapping field names
+        # to their corresponding values
+        # So we iterate over the form fields
+        #
+        # The primary id for each record from the DB has
+        # been appended to the name of the field,
+        # so we get the id and update the DB accordingly
         for element in form.iterkeys():
+            # we're interested in fields whose
+            # names begin with the string '_units_'
             if element.startswith('_units_'):
-#            if element in updated_flds:
-                print element, "jffsfdlskdflsd"
-                value = form.get(element)
-                item_id = int(element[element.rfind('_')+1:])
+                value = form.get(element) # get the value of the current field
+                item_id = int(element[element.rfind('_')+1:]) # ID for storing value in the DB has been appended to the name of current field, get it
                 param_dict = {
                     'rec_id': item_id,
                     'units':value,
