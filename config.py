@@ -41,4 +41,5 @@ class Config(object):
     user = os.environ.get('BARLEY_AUDIT_USER') or 'barley'
     pwd = os.environ.get('BARLEY_AUDIT_PWD') or 'password'
     SQLALCHEMY_DATABASE_URI = 'postgresql://'+user+':'+pwd+'@localhost:5432/barleyandshekelaudit'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     #APP_STATIC_DATA_URI = os.path.join(BASE_URI, APP_NAME, 'data')
