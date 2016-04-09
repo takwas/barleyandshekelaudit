@@ -25,7 +25,7 @@ class Config(object):
     Base configuration class. Has all the common configuration
     properties.
     """
-    DEBUG = False
+    DEBUG = True
     TESTING = False
     WTF_CSRF_ENABLED = True
     SECRET_KEY = os.environ.get('CSRF_SESSION_SECRET_KEY') or \
