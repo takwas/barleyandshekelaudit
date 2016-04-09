@@ -61,9 +61,11 @@ def update():
             if element.startswith('_units_'):
                 value = form.get(element) # get the value of the current field
                 item_id = int(element[element.rfind('_')+1:]) # ID for storing value in the DB has been appended to the name of current field, get it
+                pub = form.get('_pub_'+str(item_id))
                 param_dict = {
                     'rec_id': item_id,
-                    'units':value,
+                    'units': value,
+                    'publisher': pub
                     }            
                 db_ops.update_row(db_ops.Record, dict(rec_id=item_id), param_dict)
                 flash("Updated!")
