@@ -20,7 +20,14 @@ def index():
             mode=form['mode_radio_fld'],
             query=form['query_fld']))
 
-    return render_template('index.html', searchform = form)
+    count = 0
+    all_data = load_data()
+
+    for data in all_data:
+        if data.units!=0:
+            count+=1
+
+    return render_template('index.html', searchform = form, data_count=count)
 
 
 
